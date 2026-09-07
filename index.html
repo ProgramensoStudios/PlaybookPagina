@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PLAYBOOK — Agencia de Influencers en Gaming &amp; Esports</title>
+    <meta
+      name="description"
+      content="Agencia de management de influencers en Gaming y Esports. IMK Estratégico, Gamificación, Gameplay, Activaciones y más."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,500&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Custom cursor: gaming reticle built from the brand's "tache" cross -->
+    <div class="reticle" aria-hidden="true">
+      <span class="reticle__arm reticle__arm--v"></span>
+      <span class="reticle__arm reticle__arm--h"></span>
+      <span class="reticle__ring"></span>
+    </div>
+
+    <!-- Fixed dot-grid noise layer, brand element -->
+    <div class="dot-field" aria-hidden="true"></div>
+
+    <!-- ============ NAV ============ -->
+    <header class="nav" id="nav">
+      <a href="#home" class="nav__logo" aria-label="PLAYBOOK — inicio">
+        <img
+          src="recursos/logos/iso.png"
+          alt="Logo Playbook"
+          class="nav__logo-img"
+        />
+      </a>
+
+      <nav class="nav__links" id="navLinks">
+        <a href="#home" data-nav>Home</a>
+        <a href="#welcome" data-nav>Nosotros</a>
+        <a href="#datos" data-nav>Datos Duros</a>
+        <a href="#servicios" data-nav>Servicios</a>
+        <a href="#demo" data-nav>Demo</a>
+        <a href="#media" data-nav>Media</a>
+        <a href="#clientes" data-nav>Clientes</a>
+      </nav>
+
+      <button class="nav__cta" data-open-demo>Agenda tu Demo</button>
+
+      <button
+        class="nav__burger"
+        id="burger"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+      >
+        <span></span><span></span><span></span>
+      </button>
+    </header>
+
+    <main>
+      <!-- ============ HOME (HERO) ============ -->
+      <section class="hero" id="home">
+        <video
+          class="hero__video"
+          autoplay
+          muted
+          loop
+          playsinline
+          poster="assets/hero-poster.jpg"
+        >
+          <source src="recursos/videos/gaming_video.mp4" type="video/mp4" />
+        </video>
+        <div class="hero__overlay"></div>
+
+        <div class="hero__shapes" aria-hidden="true">
+          <span class="shape shape--hex float-a"></span>
+          <span class="shape shape--plus float-b"></span>
+          <span class="shape shape--square float-c"></span>
+          <span class="shape shape--circle float-a"></span>
+          <span class="shape shape--arrow float-b"></span>
+          <span class="shape shape--hex is-sm hero__shapes-x2 float-c"></span>
+          <span class="shape shape--plus is-sm hero__shapes-x3 float-a"></span>
+          <span
+            class="shape shape--square is-sm hero__shapes-x4 float-b"
+          ></span>
+          <span
+            class="shape shape--circle is-sm hero__shapes-x5 float-c"
+          ></span>
+          <span class="shape shape--arrow is-sm hero__shapes-x6 float-a"></span>
+          <span
+            class="shape shape--outline-hex is-sm hero__shapes-x7 float-b"
+          ></span>
+        </div>
+
+        <div class="hero__content">
+          <div class="hero__logo" data-reveal>
+            <img
+              src="recursos/logos/iso.png"
+              alt="Logo Playbook"
+              class="hero__logo-img"
+            />
+          </div>
+          <p class="hero__eyebrow" data-reveal>
+            REAL CONNECTORS IN THE DIGITAL INDUSTRY
+          </p>
+          <p class="hero__sub" data-reveal>
+            Agencia de management de influencers en
+            <strong>Gaming</strong> &amp; <strong>Esports</strong>
+          </p>
+        </div>
+
+        <a
+          href="#welcome"
+          class="hero__scroll"
+          aria-label="Baja para conocer más"
+        >
+          <span class="hero__scroll-track"
+            ><span class="hero__scroll-dot"></span
+          ></span>
+          SCROLL
+        </a>
+      </section>
+
+      <!-- ============ WELCOME ============ -->
+      <section class="welcome" id="welcome">
+        <div class="dot-field dot-field--dark" aria-hidden="true"></div>
+        <span
+          class="shape shape--outline-hex welcome__hex-1"
+          aria-hidden="true"
+        ></span>
+        <span
+          class="shape shape--outline-hex welcome__hex-2"
+          aria-hidden="true"
+        ></span>
+
+        <div class="welcome__inner">
+          <p class="welcome__kicker" data-reveal>HELLO, WE ARE PLAYBOOK</p>
+          <h2
+            class="welcome__title"
+            id="welcomeTitle"
+            aria-label="La solución creativa"
+          >
+            <span class="line" data-line>LA SOLUCIÓN</span>
+            <span class="line line--outline" data-line>CREATIVA</span>
+          </h2>
+          <p class="welcome__text" data-reveal>
+            Somos la primera agencia de management de influencers en Gaming y
+            Esports en México. Combinamos estrategia, cultura gamer y producción
+            para que las marcas hablen el idioma real de las comunidades que hoy
+            dictan la conversación digital.
+          </p>
+        </div>
+      </section>
+
+      <!-- ============ DATOS DUROS ============ -->
+      <section class="datos" id="datos">
+        <canvas class="dots-canvas" id="dotsCanvas" aria-hidden="true"></canvas>
+
+        <div class="datos__inner">
+          <p class="section-kicker" data-reveal>REAL TALK</p>
+          <h2 class="section-title" data-reveal>
+            DATOS <span class="accent">DUROS</span>
+          </h2>
+          <p class="datos__lede" data-reveal>
+            Así de fuerte pega el gaming cuando se combina con Influencer
+            Marketing. <em>(sustituir con cifras verificadas de la marca)</em>
+          </p>
+
+          <div class="datos__grid">
+            <div class="stat" data-reveal>
+              <span class="stat__hex" aria-hidden="true"></span>
+              <span class="stat__number" data-count="3.2" data-suffix="M+"
+                >0</span
+              >
+              <p class="stat__label">Gamers activos alcanzables en LATAM</p>
+            </div>
+            <div class="stat" data-reveal>
+              <span class="stat__hex" aria-hidden="true"></span>
+              <span class="stat__number" data-count="70" data-suffix="%"
+                >0</span
+              >
+              <p class="stat__label">
+                Confía más en creadores que en anuncios tradicionales
+              </p>
+            </div>
+            <div class="stat" data-reveal>
+              <span class="stat__hex" aria-hidden="true"></span>
+              <span class="stat__number" data-count="35" data-suffix="%"
+                >0</span
+              >
+              <p class="stat__label">
+                Incremento promedio en engagement con campañas gamer
+              </p>
+            </div>
+            <div class="stat" data-reveal>
+              <span class="stat__hex" aria-hidden="true"></span>
+              <span class="stat__number" data-count="500" data-suffix="+"
+                >0</span
+              >
+              <p class="stat__label">
+                Campañas activadas junto a marcas líderes
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ SERVICIOS (CAROUSEL) ============ -->
+      <section
+        class="servicios"
+        id="servicios"
+        style="background-image: url(recursos/fondos/negro.avif)"
+      >
+        <div class="servicios__inner">
+          <p class="section-kicker" data-reveal>LO QUE HACEMOS</p>
+          <h2 class="section-title" data-reveal>SERVICIOS</h2>
+
+          <div class="carousel" id="carousel">
+            <!-- Selector tabs -->
+            <div
+              class="carousel__tabs"
+              id="carouselTabs"
+              role="tablist"
+              aria-label="Selecciona un servicio"
+            ></div>
+
+            <div class="carousel__stage">
+              <button
+                class="carousel__arrow carousel__arrow--prev"
+                id="prevBtn"
+                aria-label="Servicio anterior"
+              >
+                <span class="shape shape--arrow shape--arrow-left"></span>
+              </button>
+
+              <div class="carousel__track" id="carouselTrack">
+                <!-- slides injected by JS -->
+              </div>
+
+              <button
+                class="carousel__arrow carousel__arrow--next"
+                id="nextBtn"
+                aria-label="Siguiente servicio"
+              >
+                <span class="shape shape--arrow"></span>
+              </button>
+            </div>
+
+            <div class="carousel__progress" aria-hidden="true">
+              <span id="carouselProgressBar"></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ DEMO CTA ============ -->
+      <section
+        class="demo"
+        id="demo"
+        style="
+          background-image:
+            linear-gradient(rgba(0, 0, 0, 0.861), rgba(0, 0, 0, 0.233)),
+            url(recursos/fondos/gris.avif);
+          background-size: cover;
+          background-position: center;
+        "
+      >
+        <span class="shape shape--plus demo__plus-1" aria-hidden="true"></span>
+        <span class="shape shape--plus demo__plus-2" aria-hidden="true"></span>
+        <span
+          class="shape shape--outline-circle demo__circle"
+          aria-hidden="true"
+        ></span>
+
+        <div class="demo__inner">
+          <p class="section-kicker" data-reveal>OFFICE GAMING DAY</p>
+          <h2 class="demo__title" data-reveal>
+            LLEVA EL GAMING<br />A TU <span class="accent">EQUIPO</span>
+          </h2>
+          <p class="demo__text" data-reveal>
+            Agenda una demo y arma un Office Gaming Day para tu empresa:
+            torneos, retos y dinámicas que integran equipos con el espíritu
+            competitivo de los videojuegos.
+          </p>
+          <button class="btn-demo" data-open-demo data-reveal>
+            <span class="btn-demo__plus" aria-hidden="true"></span>
+            AGENDAR MI DEMO
+          </button>
+        </div>
+      </section>
+
+      <!-- ============ MEDIA (FULLSCREEN) ============ -->
+      <section class="media" id="media">
+        <p class="section-kicker section-kicker--light" data-reveal>
+          NUESTRO TRABAJO
+        </p>
+        <h2 class="section-title section-title--light" data-reveal>MEDIA</h2>
+
+        <div class="media__filters" data-reveal>
+          <button class="media__filter is-active" data-filter="all">
+            Todo
+          </button>
+          <button class="media__filter" data-filter="vertical">
+            Verticales
+          </button>
+          <button class="media__filter" data-filter="stream">Streams</button>
+          <button class="media__filter" data-filter="gameplay">
+            Gameplays
+          </button>
+        </div>
+
+        <div class="media__grid" id="mediaGrid">
+          <!-- injected by JS -->
+        </div>
+      </section>
+
+      <!-- ============ CLIENTES ============ -->
+      <section class="clientes" id="clientes">
+        <p class="section-kicker" data-reveal>CONFÍAN EN NOSOTROS</p>
+        <h2 class="section-title" data-reveal>CLIENTES</h2>
+
+        <div class="marquee">
+          <div class="marquee__track" id="marqueeTrack">
+            <!-- duplicated logo set injected by JS for seamless loop -->
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="footer">
+      <span
+        class="shape shape--outline-hex footer__hex"
+        aria-hidden="true"
+      ></span>
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <img
+            src="recursos/logos/iso.png"
+            alt="Logo Playbook"
+            class="footer__logo-img"
+            style="min-width: 100px; min-height: 100px"
+          />
+        </div>
+        <p class="footer__tag">READY TO PLAY?</p>
+        <div class="footer__contact">
+          <a href="mailto:contacto@agenciaplaybook.com"
+            >contacto@agenciaplaybook.com</a
+          >
+          <a href="tel:5554718487">55 5471 8487</a>
+        </div>
+        <div class="footer__social">
+          <a
+            href="https://www.instagram.com/playbook.house?utm_source=ig_web_button_share_sheet&igsi=ZDNlZDc0MzIxNw=="
+            target="_blank"
+            rel="noopener"
+            >Instagram</a
+          >
+          <a
+            href="https://www.linkedin.com/company/agencia-playbook"
+            target="_blank"
+            rel="noopener"
+            >LinkedIn</a
+          >
+        </div>
+        <p class="footer__legal">
+          © 2026 AGENCIA PLAYBOOK. TODOS LOS DERECHOS RESERVADOS.
+        </p>
+      </div>
+    </footer>
+
+    <!-- ============ DEMO MODAL ============ -->
+    <div class="modal" id="demoModal" aria-hidden="true">
+      <div class="modal__backdrop" data-close-demo></div>
+      <div
+        class="modal__panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modalTitle"
+      >
+        <button class="modal__close" data-close-demo aria-label="Cerrar">
+          <span class="shape shape--plus"></span>
+        </button>
+
+        <div class="modal__body" id="modalBody">
+          <p class="section-kicker">OFFICE GAMING DAY</p>
+          <h3 id="modalTitle" class="modal__title">
+            AGENDA TU <span class="accent">DEMO</span>
+          </h3>
+          <p class="modal__text">
+            Cuéntanos de tu marca y te contactamos para armar tu Office Gaming
+            Day.
+          </p>
+
+          <form id="demoForm" class="demo-form">
+            <label>
+              Nombre
+              <input type="text" name="nombre" required />
+            </label>
+            <label>
+              Empresa
+              <input type="text" name="empresa" required />
+            </label>
+            <label>
+              Correo
+              <input type="email" name="correo" required />
+            </label>
+
+            <button type="submit" class="btn-demo btn-demo--full">
+              <span class="btn-demo__plus" aria-hidden="true"></span>
+              ENVIAR SOLICITUD
+            </button>
+          </form>
+
+          <div class="demo-form__success" id="demoSuccess" hidden>
+            <span class="shape shape--outline-hex demo-form__hex"></span>
+            <h4>¡LISTO!</h4>
+            <p>
+              Recibimos tu solicitud. Nuestro equipo te contacta muy pronto para
+              agendar tu Office Gaming Day.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
