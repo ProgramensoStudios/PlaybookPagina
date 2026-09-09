@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
       reticle.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
     });
     document
-      .querySelectorAll("a, button, .media-item, .stat, .carousel__tabs button")
+      .querySelectorAll("a, button, .media-item, .stat, .hex-card")
       .forEach((el) => {
         el.addEventListener("mouseenter", () =>
           reticle.classList.add("is-active"),
@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
   );
   statNumbers.forEach((el) => countObserver.observe(el));
 
-  /* ---------------- SERVICIOS carousel ---------------- */
+  /* ---------------- SERVICIOS: datos de cada servicio ---------------- */
   const services = [
     {
       title: "IMK Estratégica",
@@ -150,13 +150,14 @@ document.addEventListener("DOMContentLoaded", () => {
     {
       title: "Gameplay",
       desc: "Producción de streams y contenido de gameplay que se siente auténtico dentro de las comunidades gamer.",
-      img: "assets/services/gameplay.jpg",
+      img: "recursos/servicios/gameDev.png",
       items: [
         "Producción de live streaming",
         "Gameplays con talento propio",
         "Contenido nativo por plataforma",
         "Cobertura de torneos",
       ],
+      video: "recursos/videos/hero.mp4",
     },
     {
       title: "Corporativo",
@@ -193,68 +194,105 @@ document.addEventListener("DOMContentLoaded", () => {
     },
   ];
   // Sube tus fotos con esos nombres a /assets/services/ (o cambia las rutas de arriba).
-  // Recomendado: fotos horizontales, mínimo 900x675px, mismo tono/color entre ellas para que el carrusel se vea parejo.
+  // Recomendado: fotos horizontales, mínimo 900x675px, mismo tono/color entre ellas para que el pop-up se vea parejo.
+  // Si quieres video de fondo en el pop-up de un servicio en vez de foto, agrégale la propiedad
+  // "video: 'ruta/a/tu/video.mp4'" a ese objeto — la imagen (img) se sigue usando como poster mientras carga.
+  // Ejemplo:
+  // { title: "Gameplay", desc: "...", img: "assets/services/gameplay.jpg", video: "recursos/videos/gameplay-loop.mp4", items: [...] }
 
-  const tabsEl = document.getElementById("carouselTabs");
-  const trackEl = document.getElementById("carouselTrack");
-  const progressBar = document.getElementById("carouselProgressBar");
-  let currentSlide = 0;
-  let carouselTimer;
+  const gridEl = document.getElementById("servicesGrid");
+  const serviceModal = document.getElementById("serviceModal");
+  const serviceModalMedia = document.getElementById("serviceModalMedia");
+  const serviceModalNum = document.getElementById("serviceModalNum");
+  const serviceModalTitle = document.getElementById("serviceModalTitle");
+  const serviceModalDesc = document.getElementById("serviceModalDesc");
+  const serviceModalList = document.getElementById("serviceModalList");
 
   services.forEach((service, i) => {
-    const tab = document.createElement("button");
-    tab.textContent = service.title;
-    tab.setAttribute("role", "tab");
-    tab.addEventListener("click", () => goToSlide(i));
-    tabsEl.appendChild(tab);
-
-    const slide = document.createElement("article");
-    slide.className = "service-slide";
-    slide.innerHTML = `
-      <div class="service-slide__visual">
-        <img class="service-slide__img" src="${service.img}" alt="${service.title}" loading="lazy">
-        <span class="service-slide__num">0${i + 1}</span>
-        <span class="shape shape--hex service-slide__badge" aria-hidden="true"></span>
-      </div>
-      <div class="service-slide__body">
-        <h3>${service.title}</h3>
-        <p>${service.desc}</p>
-        <ul class="service-slide__list">
-          ${service.items.map((it) => `<li>${it}</li>`).join("")}
-        </ul>
-      </div>`;
-    trackEl.appendChild(slide);
+    const card = document.createElement("button");
+    card.type = "button";
+    card.className = "hex-card";
+    card.setAttribute("aria-haspopup", "dialog");
+    card.setAttribute("aria-label", `Ver detalle de ${service.title}`);
+    // si el servicio tiene foto, se ve de fondo en el hexágono (blureada / efecto vidrio)
+    // para que la sección destaque incluso antes de hacer click
+    const bgHTML = service.img
+      ? `<span class="hex-card__bg" style="background-image:url('${service.img}')" aria-hidden="true"></span>
+         <span class="hex-card__glass" aria-hidden="true"></span>`
+      : "";
+    card.innerHTML = `
+      ${bgHTML}
+      <span class="hex-card__num" aria-hidden="true">0${i + 1}</span>
+      <span class="hex-card__name">${service.title}</span>`;
+    card.addEventListener("click", () => openServiceModal(i));
+    gridEl.appendChild(card);
   });
 
-  const tabButtons = tabsEl.querySelectorAll("button");
-  const slideEls = trackEl.querySelectorAll(".service-slide");
+  function openServiceModal(i) {
+    const service = services[i];
+    serviceModalNum.textContent = `0${i + 1}`;
+    serviceModalTitle.textContent = service.title;
+    serviceModalDesc.textContent = service.desc;
+    serviceModalList.innerHTML = service.items
+      .map((it) => `<li>${it}</li>`)
+      .join("");
 
-  function goToSlide(i, userInitiated = true) {
-    currentSlide = (i + services.length) % services.length;
-    slideEls.forEach((s, idx) =>
-      s.classList.toggle("is-active", idx === currentSlide),
-    );
-    tabButtons.forEach((t, idx) =>
-      t.classList.toggle("is-active", idx === currentSlide),
-    );
-    progressBar.style.transform = `translateX(${currentSlide * 100}%)`;
-    if (userInitiated) restartAutoplay();
+    if (service.video) {
+      // video de fondo: usa la imagen como poster mientras carga
+      serviceModalMedia.innerHTML = `
+        <video src="${service.video}" ${service.img ? `poster="${service.img}"` : ""}
+          autoplay muted loop playsinline></video>`;
+      // algunos navegadores (Safari/iOS sobre todo) no confían en el atributo
+      // "muted" cuando el <video> se inserta por innerHTML, y bloquean el autoplay
+      // en silencio. Forzamos la propiedad + el play() por JS como respaldo.
+      const vid = serviceModalMedia.querySelector("video");
+      if (vid) {
+        vid.muted = true;
+        vid.play().catch(() => {
+          // si el navegador aun así lo bloquea, no truena nada: se queda en el poster
+        });
+      }
+    } else if (service.img) {
+      serviceModalMedia.innerHTML = `
+        <img src="${service.img}" alt="${service.title}" loading="lazy">`;
+    } else {
+      // sin foto ni video para este servicio: se muestra un fondo de marca en vez de una imagen rota
+      serviceModalMedia.innerHTML = `
+        <div class="service-modal__media-fallback">
+          <span class="shape shape--outline-hex" aria-hidden="true"></span>
+        </div>`;
+    }
+
+    serviceModal.classList.add("is-open");
+    serviceModal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
   }
-
-  function restartAutoplay() {
-    clearInterval(carouselTimer);
-    carouselTimer = setInterval(() => goToSlide(currentSlide + 1, false), 6000);
+  function closeServiceModal() {
+    const video = serviceModalMedia.querySelector("video");
+    if (video) video.pause();
+    serviceModal.classList.remove("is-open");
+    serviceModal.setAttribute("aria-hidden", "true");
+    if (!modal.classList.contains("is-open")) {
+      document.body.style.overflow = "";
+    }
   }
+  serviceModal
+    .querySelectorAll("[data-close-service]")
+    .forEach((btn) => btn.addEventListener("click", closeServiceModal));
 
-  document
-    .getElementById("prevBtn")
-    .addEventListener("click", () => goToSlide(currentSlide - 1));
-  document
-    .getElementById("nextBtn")
-    .addEventListener("click", () => goToSlide(currentSlide + 1));
-
-  goToSlide(0, false);
-  restartAutoplay();
+  // scroll-reveal for the hex grid: cards fade/rise in with a stagger set in CSS
+  const servicesGridObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          gridEl.classList.add("is-inview");
+          servicesGridObserver.unobserve(gridEl);
+        }
+      });
+    },
+    { threshold: 0.15 },
+  );
+  servicesGridObserver.observe(gridEl);
 
   /* ---------------- MEDIA grid ---------------- */
   const mediaItems = [
@@ -423,12 +461,16 @@ document.addEventListener("DOMContentLoaded", () => {
   function closeModal() {
     modal.classList.remove("is-open");
     modal.setAttribute("aria-hidden", "true");
-    document.body.style.overflow = "";
+    if (!serviceModal.classList.contains("is-open")) {
+      document.body.style.overflow = "";
+    }
   }
   openTriggers.forEach((btn) => btn.addEventListener("click", openModal));
   closeTriggers.forEach((btn) => btn.addEventListener("click", closeModal));
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeModal();
+    if (e.key !== "Escape") return;
+    if (modal.classList.contains("is-open")) closeModal();
+    if (serviceModal.classList.contains("is-open")) closeServiceModal();
   });
 
   demoForm.addEventListener("submit", (e) => {

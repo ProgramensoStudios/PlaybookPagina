@@ -213,49 +213,61 @@
       <section
         class="servicios"
         id="servicios"
-        style="background-image: url(recursos/fondos/negro.avif)"
+        style="
+          background-image: url(recursos/fondos/negro.avif);
+          background-size: cover;
+          background-position: center;
+        "
       >
         <div class="servicios__inner">
           <p class="section-kicker" data-reveal>LO QUE HACEMOS</p>
           <h2 class="section-title" data-reveal>SERVICIOS</h2>
 
-          <div class="carousel" id="carousel">
-            <!-- Selector tabs -->
-            <div
-              class="carousel__tabs"
-              id="carouselTabs"
-              role="tablist"
-              aria-label="Selecciona un servicio"
-            ></div>
-
-            <div class="carousel__stage">
-              <button
-                class="carousel__arrow carousel__arrow--prev"
-                id="prevBtn"
-                aria-label="Servicio anterior"
-              >
-                <span class="shape shape--arrow shape--arrow-left"></span>
-              </button>
-
-              <div class="carousel__track" id="carouselTrack">
-                <!-- slides injected by JS -->
-              </div>
-
-              <button
-                class="carousel__arrow carousel__arrow--next"
-                id="nextBtn"
-                aria-label="Siguiente servicio"
-              >
-                <span class="shape shape--arrow"></span>
-              </button>
-            </div>
-
-            <div class="carousel__progress" aria-hidden="true">
-              <span id="carouselProgressBar"></span>
-            </div>
+          <div
+            class="services-grid"
+            id="servicesGrid"
+            aria-label="Selecciona un servicio para ver el detalle"
+          >
+            <!-- hex cards injected by JS -->
           </div>
         </div>
       </section>
+
+      <!-- ============ DESARROLLO DE VIDEOJUEGOS (HERO FULLSCREEN) ============ -->
+      <!-- El botón de abajo es solo visual por ahora (sin acción) -->
+      <!-- Sube tu video a recursos/videos/ y cambia la ruta del <source> más abajo -->
+      <!--<section class="gamedev" id="gamedev">
+        <video
+          class="gamedev__video"
+          autoplay
+          muted
+          loop
+          playsinline
+          poster="assets/gamedev-poster.jpg"
+        >
+          <source src="recursos/videos/hero.mp4" type="video/mp4" />
+        </video>
+        <div class="gamedev__overlay"></div>
+
+        <span
+          class="shape shape--outline-hex gamedev__hex-1"
+          aria-hidden="true"
+        ></span>
+        <span
+          class="shape shape--outline-hex gamedev__hex-2"
+          aria-hidden="true"
+        ></span>
+
+        <div class="gamedev__content">
+          <a href="https://www.programensostudios.com" target="_blank">
+            <span class="btn-demo__plus" aria-hidden="true"></span>
+            <button class="btn-demo" data-reveal type="button">
+              <span class="btn-demo__plus" aria-hidden="true"></span>
+              SABER MÁS ACERCA DEL DESARROLLO DE VIDEOJUEGOS
+            </button>
+          </a>
+        </div>
+      </section>-->
 
       <!-- ============ DEMO CTA ============ -->
       <section
@@ -424,6 +436,34 @@
               agendar tu Office Gaming Day.
             </p>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ SERVICE MODAL ============ -->
+    <div class="modal" id="serviceModal" aria-hidden="true">
+      <div class="modal__backdrop" data-close-service></div>
+
+      <!-- video/foto a pantalla completa, detrás de la tarjeta de info -->
+      <div class="service-modal__media" id="serviceModalMedia">
+        <!-- image or video injected by JS -->
+      </div>
+
+      <div
+        class="modal__panel modal__panel--service"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="serviceModalTitle"
+      >
+        <button class="modal__close" data-close-service aria-label="Cerrar">
+          <span class="shape shape--plus"></span>
+        </button>
+
+        <div class="modal__body">
+          <p class="service-modal__num" id="serviceModalNum">01</p>
+          <h3 id="serviceModalTitle" class="modal__title"></h3>
+          <p class="modal__text" id="serviceModalDesc"></p>
+          <ul class="service-modal__list" id="serviceModalList"></ul>
         </div>
       </div>
     </div>
