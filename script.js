@@ -444,8 +444,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const ecosystemDirections = {
     out: {
       title: "Gamificación para conectar marcas y audiencias.",
-      text:
-        "Convertimos la participación en una experiencia. Aplicamos mecánicas de juego para motivar acciones, facilitar el aprendizaje y generar conexiones más profundas entre personas, marcas y organizaciones, con una intención clara: lograr que las personas quieran participar y que cada interacción pueda medirse.",
+      text: "Convertimos la participación en una experiencia. Aplicamos mecánicas de juego para motivar acciones, facilitar el aprendizaje y generar conexiones más profundas entre personas, marcas y organizaciones, con una intención clara: lograr que las personas quieran participar y que cada interacción pueda medirse.",
       items: [
         "Retos y concursos.",
         "Experiencias jugables.",
@@ -458,8 +457,7 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     in: {
       title: "Gamificación para fortalecer personas y equipos.",
-      text:
-        "Convertimos la participación en una experiencia. Aplicamos mecánicas de juego para motivar acciones, facilitar el aprendizaje y generar conexiones más profundas entre personas, marcas y organizaciones, con una intención clara: lograr que las personas quieran participar y que cada interacción pueda medirse.",
+      text: "Convertimos la participación en una experiencia. Aplicamos mecánicas de juego para motivar acciones, facilitar el aprendizaje y generar conexiones más profundas entre personas, marcas y organizaciones, con una intención clara: lograr que las personas quieran participar y que cada interacción pueda medirse.",
       items: [
         "Capacitación interactiva.",
         "Retos colaborativos.",
@@ -474,10 +472,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function openEcosystemModal(direction) {
     const content = ecosystemDirections[direction];
-    ecosystemModalKicker.textContent = direction === "out" ? "PLAY OUT" : "PLAY IN";
+    ecosystemModalKicker.textContent =
+      direction === "out" ? "PLAY OUT" : "PLAY IN";
     ecosystemModalTitle.textContent = content.title;
     ecosystemModalText.textContent = content.text;
-    ecosystemModalList.innerHTML = content.items.map((item) => `<li>${item}</li>`).join("");
+    ecosystemModalList.innerHTML = content.items
+      .map((item) => `<li>${item}</li>`)
+      .join("");
     ecosystemModal.classList.add("is-open");
     ecosystemModal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
@@ -486,17 +487,24 @@ document.addEventListener("DOMContentLoaded", () => {
   function closeEcosystemModal() {
     ecosystemModal.classList.remove("is-open");
     ecosystemModal.setAttribute("aria-hidden", "true");
-    if (!modal.classList.contains("is-open") && !serviceModal.classList.contains("is-open")) {
+    if (
+      !modal.classList.contains("is-open") &&
+      !serviceModal.classList.contains("is-open")
+    ) {
       document.body.style.overflow = "";
     }
   }
 
   document.querySelectorAll("[data-ecosistema]").forEach((button) => {
-    button.addEventListener("click", () => openEcosystemModal(button.dataset.ecosistema));
+    button.addEventListener("click", () =>
+      openEcosystemModal(button.dataset.ecosistema),
+    );
   });
-  ecosystemModal.querySelectorAll("[data-close-ecosistema]").forEach((button) => {
-    button.addEventListener("click", closeEcosystemModal);
-  });
+  ecosystemModal
+    .querySelectorAll("[data-close-ecosistema]")
+    .forEach((button) => {
+      button.addEventListener("click", closeEcosystemModal);
+    });
 
   /* ---------------- DEMO modal ---------------- */
   const modal = document.getElementById("demoModal");
