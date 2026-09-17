@@ -129,7 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const services = [
     {
       title: "IMK + ESTRATEGIA 360",
-      img: "recursos/fotos/gaming.HEIC",
+      img: "recursos/fotos/3.png",
       items: [
         "Estrategia de influencer marketing",
         "Campañas",
@@ -141,7 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
     {
       title: "ACTIVACIONES Y EXPERIENCIAS",
 
-      img: "assets/services/gamificacion.jpg",
+      img: "recursos/fotos/1.png",
       items: [
         "Eventos",
         "Lanzamientos",
@@ -151,13 +151,13 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     {
       title: " GAMING & ESPORTS",
-      img: "recursos/servicios/gameDev.png",
+      img: "recursos/fotos/6.png",
       items: ["Videojuegos", "Torneos", "Mundos digitales", "Comunidades"],
       video: "recursos/videos/hero.mp4",
     },
     {
       title: " EXPERIENCIAS CORPORATIVAS",
-      img: "assets/services/corporativo.jpg",
+      img: "recursos/fotos/5.png",
       items: [
         "Team buildings",
         "Procesos de integración",
@@ -167,13 +167,13 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     {
       title: "FORMACIÓN Y CONOCIMIENTO",
-      img: "assets/services/activaciones.jpg",
+      img: "recursos/fotos/7.png",
       items: ["Capacitaciones", "Mentorías", "Workshops", "Game Jams"],
       video: "recursos/videos/formacion.mp4",
     },
     {
       title: "DESARROLLO TECNOLÓGICO",
-      img: "assets/services/workshops.jpg",
+      img: "recursos/fotos/2.png",
       items: [
         "Videojuegos",
         "Plataformas",
@@ -289,13 +289,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const mediaItems = [
     {
       tag: "Stream",
-      title: "Little Ceasars — Stream",
-      description:
-        "Una transmisión en vivo diseñada para convertir la audiencia en participación.",
+      title: "Evento de Creadores - Twitch",
+      description: "Evento en vivo con más de 50 creadores.",
       cat: "stream",
       shape: "wide",
-      video: "recursos/videos/little.mp4",
-      poster: "recursos/posters/litle.png",
+      video: "recursos/videos/horizontales/cherrydq.mp4",
+      poster: "recursos/posters/chq.png",
     },
     {
       tag: "Vertical",
@@ -304,68 +303,50 @@ document.addEventListener("DOMContentLoaded", () => {
         "Contenido vertical pensado para detener el scroll y llevar la campaña directo a la comunidad.",
       cat: "vertical",
       shape: "vertical",
-      video: "recursos/videos/campañaMario.mp4",
-      poster: "recursos/posters/mario.png",
+      video: "recursos/videos/verticales/bolofest.mp4",
+      poster: "recursos/posters/bolo.png",
     },
-    {
-      tag: "Gameplay",
-      title: "Highlights de gameplay",
-      description:
-        "Los mejores momentos de juego editados para compartir la emoción en segundos.",
-      cat: "gameplay",
-      shape: "square",
-      video: "assets/media/gameplay-1.mp4",
-      poster: "assets/media/gameplay-1.jpg",
-    },
+
     {
       tag: "Vertical",
-      title: "Didi — Reels",
+      title: "Little Caesars — Reel",
       description:
         "Una activación ágil y nativa para conectar una marca con nuevas audiencias.",
       cat: "vertical",
       shape: "vertical",
-      video: "recursos/videos/campañaDidi.mp4",
-      poster: "recursos/posters/didi.png",
+      video: "recursos/videos/verticales/little.mp4",
+      poster: "recursos/posters/little.png",
     },
     {
       tag: "Stream",
-      title: "Live co-branding con creador",
+      title: "Danup",
       description:
         "Creador, marca y comunidad compartiendo una experiencia en tiempo real.",
       cat: "stream",
       shape: "wide",
-      video: "assets/media/stream-2.mp4",
+      video: "assets/videos/horizontales/danup.mov",
       poster: "assets/media/stream-2.jpg",
     },
-    {
-      tag: "Gameplay",
-      title: "Campaña activación in-game",
-      description:
-        "Una experiencia jugable que convierte la atención en interacción medible.",
-      cat: "gameplay",
-      shape: "square",
-      video: "assets/media/gameplay-2.mp4",
-      poster: "assets/media/gameplay-2.jpg",
-    },
-    {
-      tag: "Gameplay",
-      title: "Producción de torneo interno",
-      description:
-        "Competencia, comunidad y espectáculo en un formato hecho para jugarse y verse.",
-      cat: "gameplay",
-      shape: "square",
-      video: "assets/media/gameplay-3.mp4",
-      poster: "assets/media/gameplay-3.jpg",
-    },
+
     {
       tag: "Vertical",
-      title: "Serie de shorts — Creador",
+      title: "Lumea — Reel",
       description:
         "Una serie de piezas cortas con ritmo, personalidad y lenguaje de comunidad.",
       cat: "vertical",
       shape: "vertical",
-      video: "assets/media/vertical-3.mp4",
-      poster: "assets/media/vertical-3.jpg",
+      video: "recursos/videos/verticales/lumea.mp4",
+      poster: "recursos/posters/lumea.png",
+    },
+    {
+      tag: "Stream",
+      title: "Little Caesars — Live co-branding con creador",
+      description:
+        "Creador, marca y comunidad compartiendo una experiencia en tiempo real.",
+      cat: "stream",
+      shape: "wide",
+      video: "recursos/videos/horizontales/lc.mp4",
+      poster: "recursos/posters/manulc.png",
     },
   ];
 
