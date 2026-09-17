@@ -392,6 +392,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // reproducir/pausar dentro de la tarjeta; pausa cualquier otro video que esté sonando
   const allMediaVideos = mediaGrid.querySelectorAll(".media-item__video");
+  function playReelItem(item) {
+    if (!item || item.classList.contains("is-hidden")) return;
+    const video = item.querySelector(".media-item__video");
+    allMediaVideos.forEach((otherVideo) => {
+      if (otherVideo !== video) {
+        otherVideo.pause();
+        otherVideo.currentTime = 0;
+      }
+    });
+    mediaGrid
+      .querySelectorAll(".media-item")
+      .forEach((otherItem) =>
+        otherItem.classList.toggle("is-playing", otherItem === item),
+      );
+    video.muted = true;
+    video.preload = "auto";
+    if (video.readyState === 0) video.load();
+    video.play().catch(() => {});
+  }
+
   mediaGrid.querySelectorAll(".media-item").forEach((item) => {
     const video = item.querySelector(".media-item__video");
     item.addEventListener("click", () => {
@@ -417,6 +437,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const mediaSection = document.getElementById("media");
   const mediaNavigate = document.getElementById("mediaNavigate");
   const mediaReelsExit = document.getElementById("mediaReelsExit");
+  const reelObserver = new IntersectionObserver(
+    (entries) => {
+      if (!mediaSection.classList.contains("media--reels")) return;
+      const centeredEntry = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (centeredEntry) playReelItem(centeredEntry.target);
+    },
+    { root: mediaGrid, threshold: [0.65, 0.85] },
+  );
+  mediaGrid
+    .querySelectorAll(".media-item")
+    .forEach((item) => reelObserver.observe(item));
+
   mediaNavigate.addEventListener("click", () => {
     document.querySelector('.media__filter[data-filter="all"]').click();
   });
@@ -437,6 +471,11 @@ document.addEventListener("DOMContentLoaded", () => {
           v.currentTime = 0;
         }
       });
+      if (filter === "all") {
+        requestAnimationFrame(() =>
+          playReelItem(mediaGrid.querySelector(".media-item:not(.is-hidden)")),
+        );
+      }
     });
   });
 
