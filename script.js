@@ -1,6 +1,8 @@
 /* ==========================================================================
    PLAYBOOK — interactions
    ========================================================================== */
+document.documentElement.classList.replace("no-js", "js");
+
 document.addEventListener("DOMContentLoaded", () => {
   /* ---------------- custom cursor reticle ---------------- */
   const reticle = document.querySelector(".reticle");
