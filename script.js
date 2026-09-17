@@ -126,71 +126,60 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ---------------- SERVICIOS: datos de cada servicio ---------------- */
   const services = [
     {
-      title: "IMK Estratégica",
-      desc: "Influencer Marketing con cabeza fría: conectamos tu marca con los talentos correctos y medimos cada resultado.",
-      img: "assets/services/imk-estrategica.jpg",
+      title: "IMK + ESTRATEGIA 360",
+      img: "recursos/fotos/gaming.HEIC",
       items: [
         "Estrategia de influencer marketing",
-        "Casting & curaduría de talento gamer",
-        "Campañas cross-plataforma",
-        "Reportes de performance",
+        "Campañas",
+        "Contenido",
+        "Talento",
       ],
+      video: "recursos/videos/imk.mp4",
     },
     {
-      title: "Gamificación",
-      desc: "Traemos la lógica de los videojuegos a tu marca: retos, niveles y recompensas que enganchan de verdad.",
+      title: "ACTIVACIONES Y EXPERIENCIAS",
+
       img: "assets/services/gamificacion.jpg",
       items: [
-        "Dinámicas gamificadas a medida",
-        "Mecánicas de retos y recompensas",
-        "Apps y microexperiencias",
-        "Integración con equipos y comunidades",
+        "Eventos",
+        "Lanzamientos",
+        "experiencias presenciales, digitales e híbridas.",
       ],
+      video: "recursos/videos/activaciones.mp4",
     },
     {
-      title: "Gameplay",
-      desc: "Producción de streams y contenido de gameplay que se siente auténtico dentro de las comunidades gamer.",
+      title: " GAMING & ESPORTS",
       img: "recursos/servicios/gameDev.png",
-      items: [
-        "Producción de live streaming",
-        "Gameplays con talento propio",
-        "Contenido nativo por plataforma",
-        "Cobertura de torneos",
-      ],
+      items: ["Videojuegos", "Torneos", "Mundos digitales", "Comunidades"],
       video: "recursos/videos/hero.mp4",
     },
     {
-      title: "Corporativo",
-      desc: "Office Gaming Day: llevamos torneos y dinámicas gamer a tu empresa para integrar equipos de forma diferente.",
+      title: " EXPERIENCIAS CORPORATIVAS",
       img: "assets/services/corporativo.jpg",
       items: [
-        "Torneos internos de e-sports",
-        "Dinámicas de integración",
-        "Setup y producción en sitio",
-        "Premiación y contenido del evento",
+        "Team buildings",
+        "Procesos de integración",
+        "Office Gaming Days.",
       ],
+      video: "recursos/videos/corporativo.mp4",
     },
     {
-      title: "Activaciones",
-      desc: "Experiencias digitales y presenciales que convierten audiencias gamer en comunidad real de marca.",
+      title: "FORMACIÓN Y CONOCIMIENTO",
       img: "assets/services/activaciones.jpg",
-      items: [
-        "Activaciones BTL en eventos",
-        "Experiencias phygital",
-        "Stands e instalaciones interactivas",
-        "Activaciones 100% digitales",
-      ],
+      items: ["Capacitaciones", "Mentorías", "Workshops", "Game Jams"],
+      video: "recursos/videos/formacion.mp4",
     },
     {
-      title: "Workshops y Conferencias",
-      desc: "Formamos equipos y marcas con líderes de la industria gamer, con contenido pensado para capacitar e inspirar.",
+      title: "DESARROLLO TECNOLÓGICO",
       img: "assets/services/workshops.jpg",
       items: [
-        "Conferencias con expertos",
-        "Talleres a medida",
-        "Capacitación de equipos de marketing",
-        "Contenido de tendencias gamer",
+        "Videojuegos",
+        "Plataformas",
+        "Simuladores",
+        "Experiencias de realidad virtual",
+        "Soluciones desarrolladas a la medida",
       ],
+      video: "recursos/videos/tecnologico.mp4",
     },
   ];
   // Sube tus fotos con esos nombres a /assets/services/ (o cambia las rutas de arriba).
@@ -446,6 +435,69 @@ document.addEventListener("DOMContentLoaded", () => {
     marqueeTrack.appendChild(el);
   });
 
+  /* ---------------- ECOSISTEMA: pop-ups PLAY OUT / PLAY IN ---------------- */
+  const ecosystemModal = document.getElementById("ecosistemaModal");
+  const ecosystemModalKicker = document.getElementById("ecosistemaModalKicker");
+  const ecosystemModalTitle = document.getElementById("ecosistemaModalTitle");
+  const ecosystemModalText = document.getElementById("ecosistemaModalText");
+  const ecosystemModalList = document.getElementById("ecosistemaModalList");
+  const ecosystemDirections = {
+    out: {
+      title: "Gamificación para conectar marcas y audiencias.",
+      text:
+        "Convertimos la participación en una experiencia. Aplicamos mecánicas de juego para motivar acciones, facilitar el aprendizaje y generar conexiones más profundas entre personas, marcas y organizaciones, con una intención clara: lograr que las personas quieran participar y que cada interacción pueda medirse.",
+      items: [
+        "Retos y concursos.",
+        "Experiencias jugables.",
+        "Sistemas de puntos y recompensas.",
+        "Rankings y competencias.",
+        "Dinámicas con creadores.",
+        "Activaciones digitales y presenciales.",
+        "Videojuegos de marca.",
+      ],
+    },
+    in: {
+      title: "Gamificación para fortalecer personas y equipos.",
+      text:
+        "Convertimos la participación en una experiencia. Aplicamos mecánicas de juego para motivar acciones, facilitar el aprendizaje y generar conexiones más profundas entre personas, marcas y organizaciones, con una intención clara: lograr que las personas quieran participar y que cada interacción pueda medirse.",
+      items: [
+        "Capacitación interactiva.",
+        "Retos colaborativos.",
+        "Simuladores.",
+        "Desarrollo de habilidades.",
+        "Team buildings.",
+        "Procesos de integración.",
+        "Evaluación y métricas de aprendizaje.",
+      ],
+    },
+  };
+
+  function openEcosystemModal(direction) {
+    const content = ecosystemDirections[direction];
+    ecosystemModalKicker.textContent = direction === "out" ? "PLAY OUT" : "PLAY IN";
+    ecosystemModalTitle.textContent = content.title;
+    ecosystemModalText.textContent = content.text;
+    ecosystemModalList.innerHTML = content.items.map((item) => `<li>${item}</li>`).join("");
+    ecosystemModal.classList.add("is-open");
+    ecosystemModal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeEcosystemModal() {
+    ecosystemModal.classList.remove("is-open");
+    ecosystemModal.setAttribute("aria-hidden", "true");
+    if (!modal.classList.contains("is-open") && !serviceModal.classList.contains("is-open")) {
+      document.body.style.overflow = "";
+    }
+  }
+
+  document.querySelectorAll("[data-ecosistema]").forEach((button) => {
+    button.addEventListener("click", () => openEcosystemModal(button.dataset.ecosistema));
+  });
+  ecosystemModal.querySelectorAll("[data-close-ecosistema]").forEach((button) => {
+    button.addEventListener("click", closeEcosystemModal);
+  });
+
   /* ---------------- DEMO modal ---------------- */
   const modal = document.getElementById("demoModal");
   const openTriggers = document.querySelectorAll("[data-open-demo]");
@@ -471,12 +523,21 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.key !== "Escape") return;
     if (modal.classList.contains("is-open")) closeModal();
     if (serviceModal.classList.contains("is-open")) closeServiceModal();
+    if (ecosystemModal.classList.contains("is-open")) closeEcosystemModal();
   });
 
   demoForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    // No hay backend conectado: esto simula la confirmación.
-    // Sustituir por tu integración real (CRM, email, endpoint propio, etc).
+    const formData = new FormData(demoForm);
+    const message = [
+      "Hola Playbook, quiero agendar un Demo.",
+      `Nombre: ${formData.get("nombre")}`,
+      `Empresa: ${formData.get("empresa")}`,
+      `Correo: ${formData.get("correo")}`,
+    ].join("\n");
+    const whatsappUrl = `https://wa.me/52554718487?text=${encodeURIComponent(message)}`;
+
+    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
     demoForm.hidden = true;
     demoSuccess.hidden = false;
   });
