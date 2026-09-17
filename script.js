@@ -290,6 +290,8 @@ document.addEventListener("DOMContentLoaded", () => {
     {
       tag: "Stream",
       title: "Little Ceasars — Stream",
+      description:
+        "Una transmisión en vivo diseñada para convertir la audiencia en participación.",
       cat: "stream",
       shape: "wide",
       video: "recursos/videos/little.mp4",
@@ -298,6 +300,8 @@ document.addEventListener("DOMContentLoaded", () => {
     {
       tag: "Vertical",
       title: "Reel de campaña — Liverpool",
+      description:
+        "Contenido vertical pensado para detener el scroll y llevar la campaña directo a la comunidad.",
       cat: "vertical",
       shape: "vertical",
       video: "recursos/videos/campañaMario.mp4",
@@ -306,6 +310,8 @@ document.addEventListener("DOMContentLoaded", () => {
     {
       tag: "Gameplay",
       title: "Highlights de gameplay",
+      description:
+        "Los mejores momentos de juego editados para compartir la emoción en segundos.",
       cat: "gameplay",
       shape: "square",
       video: "assets/media/gameplay-1.mp4",
@@ -314,6 +320,8 @@ document.addEventListener("DOMContentLoaded", () => {
     {
       tag: "Vertical",
       title: "Didi — Reels",
+      description:
+        "Una activación ágil y nativa para conectar una marca con nuevas audiencias.",
       cat: "vertical",
       shape: "vertical",
       video: "recursos/videos/campañaDidi.mp4",
@@ -322,6 +330,8 @@ document.addEventListener("DOMContentLoaded", () => {
     {
       tag: "Stream",
       title: "Live co-branding con creador",
+      description:
+        "Creador, marca y comunidad compartiendo una experiencia en tiempo real.",
       cat: "stream",
       shape: "wide",
       video: "assets/media/stream-2.mp4",
@@ -330,6 +340,8 @@ document.addEventListener("DOMContentLoaded", () => {
     {
       tag: "Gameplay",
       title: "Campaña activación in-game",
+      description:
+        "Una experiencia jugable que convierte la atención en interacción medible.",
       cat: "gameplay",
       shape: "square",
       video: "assets/media/gameplay-2.mp4",
@@ -338,6 +350,8 @@ document.addEventListener("DOMContentLoaded", () => {
     {
       tag: "Gameplay",
       title: "Producción de torneo interno",
+      description:
+        "Competencia, comunidad y espectáculo en un formato hecho para jugarse y verse.",
       cat: "gameplay",
       shape: "square",
       video: "assets/media/gameplay-3.mp4",
@@ -346,6 +360,8 @@ document.addEventListener("DOMContentLoaded", () => {
     {
       tag: "Vertical",
       title: "Serie de shorts — Creador",
+      description:
+        "Una serie de piezas cortas con ritmo, personalidad y lenguaje de comunidad.",
       cat: "vertical",
       shape: "vertical",
       video: "assets/media/vertical-3.mp4",
@@ -363,8 +379,13 @@ document.addEventListener("DOMContentLoaded", () => {
       <video class="media-item__video" src="${item.video}" poster="${item.poster}" muted loop playsinline preload="none"></video>
       <span class="media-item__play"></span>
       <div class="media-item__overlay">
+        <div class="media-item__profile">
+          <span class="media-item__profile-mark">P</span>
+          <span>PLAYBOOK</span>
+        </div>
         <p class="media-item__tag">${item.tag}</p>
         <p class="media-item__title">${item.title}</p>
+        <p class="media-item__description">${item.description}</p>
       </div>`;
     mediaGrid.appendChild(el);
   });
@@ -393,11 +414,19 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   const mediaFilters = document.querySelectorAll(".media__filter");
+  const mediaSection = document.getElementById("media");
+  const mediaNavigate = document.getElementById("mediaNavigate");
+  const mediaReelsExit = document.getElementById("mediaReelsExit");
+  mediaNavigate.addEventListener("click", () => {
+    document.querySelector('.media__filter[data-filter="all"]').click();
+  });
   mediaFilters.forEach((btn) => {
     btn.addEventListener("click", () => {
       mediaFilters.forEach((b) => b.classList.remove("is-active"));
       btn.classList.add("is-active");
       const filter = btn.dataset.filter;
+      mediaSection.classList.add("media--reels");
+      mediaReelsExit.hidden = false;
       mediaGrid.querySelectorAll(".media-item").forEach((item) => {
         const show = filter === "all" || item.dataset.cat === filter;
         item.classList.toggle("is-hidden", !show);
@@ -409,6 +438,18 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
     });
+  });
+
+  mediaReelsExit.addEventListener("click", () => {
+    mediaSection.classList.remove("media--reels");
+    mediaReelsExit.hidden = true;
+    allMediaVideos.forEach((video) => {
+      video.pause();
+      video.currentTime = 0;
+    });
+    mediaGrid
+      .querySelectorAll(".media-item")
+      .forEach((item) => item.classList.remove("is-playing"));
   });
 
   /* ---------------- CLIENTES marquee ---------------- */

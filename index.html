@@ -368,6 +368,11 @@
         </p>
         <h2 class="section-title section-title--light" data-reveal>MEDIA</h2>
 
+        <button class="media__navigate" id="mediaNavigate" type="button">
+          <span class="media__navigate-icon" aria-hidden="true"></span>
+          NAVEGAR
+        </button>
+
         <div class="media__filters" data-reveal>
           <button class="media__filter is-active" data-filter="all">
             Todo
@@ -380,6 +385,16 @@
             Gameplays
           </button>
         </div>
+
+        <button
+          class="media__reels-exit"
+          id="mediaReelsExit"
+          type="button"
+          hidden
+        >
+          <span class="media__reels-exit-icon" aria-hidden="true"></span>
+          SALIR
+        </button>
 
         <div class="media__grid" id="mediaGrid">
           <!-- injected by JS -->
