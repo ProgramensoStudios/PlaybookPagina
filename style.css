@@ -546,6 +546,9 @@ img{ max-width:100%; display:block; }
 .media-item__title{ font-size:.92rem; font-weight:700; }
 .media-item__profile{ display:flex; align-items:center; gap:8px; margin-bottom:12px; font-size:.7rem; font-weight:800; letter-spacing:.12em; }
 .media-item__profile-mark{ display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; border:1px solid var(--green); border-radius:50%; color:var(--green); font-family:var(--f-display); font-size:.85rem; }
+.media-item__reach{ display:none; align-items:center; gap:5px; margin-left:auto; color:var(--white); font-size:.66rem; letter-spacing:.06em; font-weight:700; }
+.media-item__reach-icon{ position:relative; width:15px; height:10px; border:1.5px solid var(--white); border-radius:85% 15%; transform:rotate(-45deg); }
+.media-item__reach-icon::after{ content:''; position:absolute; width:3px; height:3px; top:2px; left:4px; border:1px solid var(--white); border-radius:50%; }
 .media-item__description{ max-width:420px; margin-top:8px; color:rgba(255,255,255,.78); font-size:.78rem; line-height:1.45; }
 .media-item.is-hidden{ display:none; }
 
@@ -607,6 +610,8 @@ img{ max-width:100%; display:block; }
   }
   .media.media--reels .media-item__title{ font-size:1.05rem; }
   .media.media--reels .media-item__description{ font-size:.86rem; max-width:330px; }
+  .media.media--reels .media-item__profile{ font-size:.72rem; }
+  .media.media--reels .media-item__reach{ display:inline-flex; font-size:.72rem; }
 }
 
 /* ============ CLIENTES ============ */

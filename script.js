@@ -289,7 +289,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const mediaItems = [
     {
       tag: "Stream",
-      title: "Evento de Creadores - Twitch",
+      campaign: "Cherry Dojo",
+      reach: "400k",
+      title: "Evento de creadores - Twitch",
       description: "Evento en vivo con más de 50 creadores.",
       cat: "stream",
       shape: "wide",
@@ -298,6 +300,7 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     {
       tag: "Vertical",
+      campaign: "Liverpool",
       title: "Reel de campaña — Liverpool",
       description:
         "Contenido vertical pensado para detener el scroll y llevar la campaña directo a la comunidad.",
@@ -309,6 +312,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     {
       tag: "Vertical",
+      campaign: "Little Caesars",
+      reach: "5M",
       title: "Little Caesars — Reel",
       description:
         "Una activación ágil y nativa para conectar una marca con nuevas audiencias.",
@@ -319,17 +324,33 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     {
       tag: "Stream",
+      campaign: "Danup",
+      reach: "3M+",
       title: "Danup",
       description:
         "Creador, marca y comunidad compartiendo una experiencia en tiempo real.",
       cat: "stream",
       shape: "wide",
-      video: "assets/videos/horizontales/danup.mov",
-      poster: "assets/media/stream-2.jpg",
+      video: "recursos/videos/horizontales/danup.mp4",
+      poster: "recursos/posters/danuph.png",
+    },
+    {
+      tag: "Vertical",
+      campaign: "Danup",
+      reach: "3M+",
+      title: "Danup — Reel",
+      description:
+        "Una serie de piezas cortas con ritmo, personalidad y lenguaje de comunidad.",
+      cat: "vertical",
+      shape: "vertical",
+      video: "recursos/videos/verticales/danup.mp4",
+      poster: "recursos/posters/danupv.png",
     },
 
     {
       tag: "Vertical",
+      campaign: "Lumea",
+      reach: "10M",
       title: "Lumea — Reel",
       description:
         "Una serie de piezas cortas con ritmo, personalidad y lenguaje de comunidad.",
@@ -340,6 +361,8 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     {
       tag: "Stream",
+      campaign: "Little Caesars",
+      reach: "5M",
       title: "Little Caesars — Live co-branding con creador",
       description:
         "Creador, marca y comunidad compartiendo una experiencia en tiempo real.",
@@ -363,6 +386,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="media-item__profile">
           <span class="media-item__profile-mark">P</span>
           <span>PLAYBOOK</span>
+          ${item.reach ? `<span class="media-item__reach" aria-label="Alcance: ${item.reach} vistas"><span class="media-item__reach-icon" aria-hidden="true"></span>${item.reach} vistas</span>` : ""}
         </div>
         <p class="media-item__tag">${item.tag}</p>
         <p class="media-item__title">${item.title}</p>
