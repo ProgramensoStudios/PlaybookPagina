@@ -465,14 +465,24 @@ document.addEventListener("DOMContentLoaded", () => {
     );
     const centeredItem = visibleItems
       .map((item) => ({ item, rect: item.getBoundingClientRect() }))
-      .filter(({ rect }) => rect.bottom > gridRect.top && rect.top < gridRect.bottom)
-      .sort((a, b) => Math.abs(a.rect.top + a.rect.height / 2 - centerY) - Math.abs(b.rect.top + b.rect.height / 2 - centerY))[0];
+      .filter(
+        ({ rect }) => rect.bottom > gridRect.top && rect.top < gridRect.bottom,
+      )
+      .sort(
+        (a, b) =>
+          Math.abs(a.rect.top + a.rect.height / 2 - centerY) -
+          Math.abs(b.rect.top + b.rect.height / 2 - centerY),
+      )[0];
     if (centeredItem) playReelItem(centeredItem.item);
   }
-  mediaGrid.addEventListener("scroll", () => {
-    cancelAnimationFrame(reelScrollFrame);
-    reelScrollFrame = requestAnimationFrame(playCenteredReel);
-  }, { passive: true });
+  mediaGrid.addEventListener(
+    "scroll",
+    () => {
+      cancelAnimationFrame(reelScrollFrame);
+      reelScrollFrame = requestAnimationFrame(playCenteredReel);
+    },
+    { passive: true },
+  );
 
   mediaNavigate.addEventListener("click", () => {
     document.querySelector('.media__filter[data-filter="all"]').click();
