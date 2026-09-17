@@ -392,6 +392,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // reproducir/pausar dentro de la tarjeta; pausa cualquier otro video que esté sonando
   const allMediaVideos = mediaGrid.querySelectorAll(".media-item__video");
+  let reelAudioEnabled = false;
   function playReelItem(item) {
     if (!item || item.classList.contains("is-hidden")) return;
     const video = item.querySelector(".media-item__video");
@@ -406,7 +407,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .forEach((otherItem) =>
         otherItem.classList.toggle("is-playing", otherItem === item),
       );
-    video.muted = true;
+    video.muted = !reelAudioEnabled;
     video.preload = "auto";
     const startPlayback = () => video.play().catch(() => {});
     if (video.readyState === 0) {
@@ -419,6 +420,15 @@ document.addEventListener("DOMContentLoaded", () => {
   mediaGrid.querySelectorAll(".media-item").forEach((item) => {
     const video = item.querySelector(".media-item__video");
     item.addEventListener("click", () => {
+      if (mediaSection.classList.contains("media--reels")) {
+        if (item.classList.contains("is-playing")) {
+          video.muted = true;
+          reelAudioEnabled = false;
+        } else {
+          playReelItem(item);
+        }
+        return;
+      }
       const isPlaying = item.classList.contains("is-playing");
       allMediaVideos.forEach((v) => {
         v.pause();
@@ -485,6 +495,7 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 
   mediaNavigate.addEventListener("click", () => {
+    reelAudioEnabled = true;
     document.querySelector('.media__filter[data-filter="all"]').click();
   });
   mediaFilters.forEach((btn) => {
@@ -513,6 +524,7 @@ document.addEventListener("DOMContentLoaded", () => {
   mediaReelsExit.addEventListener("click", () => {
     mediaSection.classList.remove("media--reels");
     mediaReelsExit.hidden = true;
+    reelAudioEnabled = false;
     allMediaVideos.forEach((video) => {
       video.pause();
       video.currentTime = 0;
