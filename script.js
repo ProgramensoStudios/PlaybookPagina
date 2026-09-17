@@ -408,8 +408,12 @@ document.addEventListener("DOMContentLoaded", () => {
       );
     video.muted = true;
     video.preload = "auto";
-    if (video.readyState === 0) video.load();
-    video.play().catch(() => {});
+    const startPlayback = () => video.play().catch(() => {});
+    if (video.readyState === 0) {
+      video.addEventListener("loadeddata", startPlayback, { once: true });
+      video.load();
+    }
+    startPlayback();
   }
 
   mediaGrid.querySelectorAll(".media-item").forEach((item) => {
@@ -451,6 +455,25 @@ document.addEventListener("DOMContentLoaded", () => {
     .querySelectorAll(".media-item")
     .forEach((item) => reelObserver.observe(item));
 
+  let reelScrollFrame = 0;
+  function playCenteredReel() {
+    if (!mediaSection.classList.contains("media--reels")) return;
+    const gridRect = mediaGrid.getBoundingClientRect();
+    const centerY = gridRect.top + gridRect.height / 2;
+    const visibleItems = [...mediaGrid.querySelectorAll(".media-item")].filter(
+      (item) => !item.classList.contains("is-hidden"),
+    );
+    const centeredItem = visibleItems
+      .map((item) => ({ item, rect: item.getBoundingClientRect() }))
+      .filter(({ rect }) => rect.bottom > gridRect.top && rect.top < gridRect.bottom)
+      .sort((a, b) => Math.abs(a.rect.top + a.rect.height / 2 - centerY) - Math.abs(b.rect.top + b.rect.height / 2 - centerY))[0];
+    if (centeredItem) playReelItem(centeredItem.item);
+  }
+  mediaGrid.addEventListener("scroll", () => {
+    cancelAnimationFrame(reelScrollFrame);
+    reelScrollFrame = requestAnimationFrame(playCenteredReel);
+  }, { passive: true });
+
   mediaNavigate.addEventListener("click", () => {
     document.querySelector('.media__filter[data-filter="all"]').click();
   });
@@ -472,9 +495,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
       if (filter === "all") {
-        requestAnimationFrame(() =>
-          playReelItem(mediaGrid.querySelector(".media-item:not(.is-hidden)")),
-        );
+        requestAnimationFrame(playCenteredReel);
       }
     });
   });
