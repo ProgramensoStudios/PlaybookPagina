@@ -198,6 +198,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const serviceModalTitle = document.getElementById("serviceModalTitle");
   const serviceModalDesc = document.getElementById("serviceModalDesc");
   const serviceModalList = document.getElementById("serviceModalList");
+  const serviceModalActions = document.getElementById("serviceModalActions");
 
   services.forEach((service, i) => {
     const card = document.createElement("button");
@@ -227,6 +228,38 @@ document.addEventListener("DOMContentLoaded", () => {
     serviceModalList.innerHTML = service.items
       .map((it) => `<li>${it}</li>`)
       .join("");
+
+    const whatsappText = encodeURIComponent(
+      `Hola Playbook, me interesa saber más sobre ${service.title}.`,
+    );
+    const isImk = service.title.toLowerCase().includes("imk");
+    const isTecnologico = service.title.toLowerCase().includes("desarrollo");
+
+    const actionButtons = [];
+    actionButtons.push(`
+      <a class="service-modal__cta service-modal__cta--primary" href="https://wa.me/52554718487?text=${whatsappText}" target="_blank" rel="noopener">
+        Contacto
+      </a>
+    `);
+
+    if (isImk) {
+      actionButtons.push(`
+        <a class="service-modal__cta service-modal__cta--secondary" href="https://agenciaplaybook.com/" target="_blank" rel="noopener">
+          Conoce a la Agencia de Talento
+        </a>
+      `);
+    }
+
+    if (isTecnologico) {
+      actionButtons.push(`
+        <a class="service-modal__cta service-modal__cta--developer" href="https://www.programensostudios.com/" target="_blank" rel="noopener">
+          <img src="recursos/logos/iso.png" alt="Logo Programen Studios" loading="lazy" />
+          <span>Conoce a los Desarrolladores</span>
+        </a>
+      `);
+    }
+
+    serviceModalActions.innerHTML = actionButtons.join("");
 
     if (service.video) {
       // video de fondo: usa la imagen como poster mientras carga
@@ -371,6 +404,19 @@ document.addEventListener("DOMContentLoaded", () => {
       video: "recursos/videos/horizontales/lc.mp4",
       poster: "recursos/posters/manulc.png",
     },
+    {
+      tag: "Release",
+      campaign: "Pa´ La Cancha",
+      reach: "2M+",
+      title: "Pa´ La Cancha — Release",
+      description:
+        "Lanzamiento con energía, comunidad y un look gamer que pega directo al target.",
+      cat: "gameplay",
+      shape: "square",
+      video: "recursos/videos/horizontales/lc.mp4",
+      poster: "recursos/fotos/palacancha.jpg",
+      url: "https://onelink.to/palacancha",
+    },
   ];
 
   const mediaGrid = document.getElementById("mediaGrid");
@@ -379,6 +425,7 @@ document.addEventListener("DOMContentLoaded", () => {
     el.className = "media-item";
     el.dataset.cat = item.cat;
     el.dataset.shape = item.shape;
+    if (item.url) el.dataset.url = item.url;
     el.innerHTML = `
       <video class="media-item__video" src="${item.video}" poster="${item.poster}" muted loop playsinline preload="none"></video>
       <span class="media-item__play"></span>
@@ -425,6 +472,11 @@ document.addEventListener("DOMContentLoaded", () => {
   mediaGrid.querySelectorAll(".media-item").forEach((item) => {
     const video = item.querySelector(".media-item__video");
     item.addEventListener("click", () => {
+      const itemUrl = item.dataset.url;
+      if (itemUrl) {
+        window.open(itemUrl, "_blank", "noopener,noreferrer");
+        return;
+      }
       if (mediaSection.classList.contains("media--reels")) {
         if (item.classList.contains("is-playing")) {
           video.muted = true;
